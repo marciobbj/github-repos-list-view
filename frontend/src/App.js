@@ -1,24 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, Component }from 'react';
 import './App.css';
+import GlobalStyle from './styles/global'
+import Search from './components/search'
+import Result from './components/result'
+import Container from './components/container'
+import List from './components/list'
+
+
+class Main extends Component {
+  state = {
+    repositories: [
+      {
+        name: 'facebook/react',
+        owner: {
+          name: 'facebook',
+          avatar_url: 'https://avatars3.githubusercontent.com/u/69631?v=4',
+        },
+      },
+    ],
+    loading: false,
+    error: false,
+    errorMessage: '',
+  };
+
+  render() {
+    const { repositories } = this.state;
+
+    return (
+      <Container>
+        <header className="App-header">
+          <h3 style={{margin: "10px 0"}}>Search Github: </h3>
+          <Search />
+        </header>
+
+        <List>
+          {repositories.map(repo => (
+            <li key={repo.name}>
+                <Result 
+                  avatar_url={repo.owner.avatar_url}
+                  name={repo.name}
+                />
+            </li>
+          ))}
+        </List>
+
+      </Container>
+    )
+  }
+}
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalStyle></GlobalStyle>
+      <Main />
     </div>
   );
 }
