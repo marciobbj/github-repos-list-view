@@ -1,18 +1,18 @@
-import React, { useState }from 'react';
+import React, { useState, setState }from 'react';
+import ghClientInstance from './../../external_clients/github'
 
-
-const Search = () => {
+const Search = (props) => {
     // stores the input values and handle its
     // updates behind the covers. 
     const [inputValue, setinputValue] = useState("")
-  
+
     // event handler for the search bar input
     const inputEvent = (event) => {
       const data = event.target.value;
       console.log(data)
       setinputValue(data)
     }
-  
+
     return (
       <div className="searchBar">
         <input
@@ -21,6 +21,7 @@ const Search = () => {
           value={inputValue}
           onChange={inputEvent}
         />
+        <button onClick={(e) => props.usernameHandler(inputValue)}>Go!</button>
      </div>
     )
   }
