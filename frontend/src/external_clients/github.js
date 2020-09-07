@@ -8,11 +8,9 @@ const github = axios.create({
 class githubClient {
   // Adapter class for the github client
 
-  constructor(axios_client){
-    this.request = axios_client
-  }
-
   async fetchByUsername(username) {
+    // Makes a POST request for the GraphQL endpoint
+    // requesting user information.
     try {
       const response = await github.post(
         '',
@@ -48,6 +46,6 @@ class githubClient {
   }}
 }
 
-const ghClientInstance = new githubClient(github)
+const ghClientInstance = new githubClient()
 
 export default ghClientInstance;

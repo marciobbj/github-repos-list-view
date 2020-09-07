@@ -25,9 +25,13 @@ class Main extends Component {
   };
   
   componentDidUpdate(prevProps, prevState) {
+    // if the new username value is different than
+    // the previous one, then we make the Github call.
     if (prevState.username != this.state.username){
       const reposPromise = ghClientInstance.fetchByUsername(this.state.username).then(
         response => {
+          // spread all the information inside the repositories states
+          // and save the user avatar in the state as well.
           this.setState({
             repositories: [...response.data.repositoryOwner.repositories.nodes],
             avatar: response.data.repositoryOwner.avatarUrl
