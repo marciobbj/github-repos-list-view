@@ -36,12 +36,10 @@ class Main extends Component {
         <List>
           {repositories.map(repo => (
             <li key={repo.name}>
-              <div>
                 <Result 
                   avatar_url={repo.owner.avatar_url}
                   name={repo.name}
                 />
-              </div>
             </li>
           ))}
         </List>
