@@ -1,12 +1,8 @@
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-  }
-}
-
-.App-header {
-}
-
-.App-link {
+.App {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 0 0 1rem;
 }
 
