@@ -14,7 +14,6 @@ class githubClient {
 
   async fetchByUsername(username) {
     try {
-      
       const response = await github.post(
         '',
         {

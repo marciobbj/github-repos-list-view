@@ -14,7 +14,7 @@ const Search = (props) => {
     }
 
     return (
-      <div className="searchBar">
+      <div className="searchBar" style={{textAlign: "center"}}>
         <input
           type="text"
           placeholder="Username:"

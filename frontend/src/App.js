@@ -51,7 +51,7 @@ class Main extends Component {
       <Container>
         
         <header className="App-header">
-          <h3 style={{margin: "10px 0"}}>Search Github: {this.state.username} </h3>
+          <h3 style={{margin: "10px 0", textAlign: "center"}}>Search Github: {this.state.username} </h3>
           <Search usernameHandler={this.changeUsername}/>
         </header>
 
@@ -66,6 +66,7 @@ class Main extends Component {
                 <Result 
                   name={repo.name}
                   repo_url={repo.url}
+                  description={repo.description}
                 />
             </li>
           ))}
