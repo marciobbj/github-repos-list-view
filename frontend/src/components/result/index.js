@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Result = () => {
-    const img = "https://source.unsplash.com/random/200x200"
+const Result = (props) => {
     return (
       <div className="resultContainer">
-        <img src={img}></img>
+        <img src={props.avatar_url} alt={props.name} />
+        <span>{props.name}</span>
       </div>
     )
   }

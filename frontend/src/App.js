@@ -32,15 +32,15 @@ class Main extends Component {
           <h3 style={{margin: "10px 0"}}>Search Github: </h3>
           <Search />
         </header>
-        
+
         <List>
           {repositories.map(repo => (
             <li key={repo.name}>
               <div>
-                <a href='/'>
-                  <img src={repo.owner.avatar_url} alt={repo.owner.name} />
-                  <span>{repo.name}</span>
-                </a>
+                <Result 
+                  avatar_url={repo.owner.avatar_url}
+                  name={repo.name}
+                />
               </div>
             </li>
           ))}
