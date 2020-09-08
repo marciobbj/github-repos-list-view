@@ -1,9 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const github = axios.create({
-  baseURL: 'https://api.github.com/graphql',
+  baseURL: "https://api.github.com/graphql",
 });
-
 
 class githubClient {
   // Adapter class for the github client
@@ -13,7 +12,7 @@ class githubClient {
     // requesting user information.
     try {
       const response = await github.post(
-        '',
+        "",
         {
           query: `{
             repositoryOwner(login: "${username}") {
@@ -31,21 +30,23 @@ class githubClient {
                 }
               }
             }
-          }`
-        }, 
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${"8913ed395c8f547100928a131080d7c88b00e5d3"}`
+          }`,
         },
-      })
-      return response.data
-  } catch(err) {
-    console.error(err)
-    return false
-  }}
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${"8913ed395c8f547100928a131080d7c88b00e5d3"}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
 }
 
-const ghClientInstance = new githubClient()
+const ghClientInstance = new githubClient();
 
 export default ghClientInstance;
