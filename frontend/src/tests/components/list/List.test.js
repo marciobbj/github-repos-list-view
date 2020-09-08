@@ -22,9 +22,7 @@ describe("test the List component", () => {
         ]}
       />
     );
-    // gets the inputNode
-    const inputNode = getByPlaceholderText("Search...");
     // assert the search bar is on
-    expect(inputNode).toBeInTheDocument();
+    expect(getByPlaceholderText("Search..."))
   });
 });
