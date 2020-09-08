@@ -4,7 +4,7 @@ import GlobalStyle from './styles/global'
 import Search from './components/search'
 import Result from './components/result'
 import Container from './components/container'
-import List from './components/list'
+import StyledList from './components/list'
 import ghClientInstance from './external_clients/github';
 
 
@@ -63,19 +63,9 @@ class Main extends Component {
           <img style={{margin: "5px"}} src={this.state.avatar}></img>
           <p style={{margin: "5px"}}>{this.state.username ? `User ${this.state.username} has ${repositories.length} repos available.`: null}</p>
         </div>
-        
-        <List>
-          {repositories.map(repo => (
-            <li key={repo.name}>
-                <Result 
-                  name={repo.name}
-                  repo_url={repo.url}
-                  description={repo.description}
-                />
-            </li>
-          ))}
-        </List>
 
+        <StyledList repositories={this.state.repositories} />
+         
       </Container>
     )
   }
