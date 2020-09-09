@@ -29,6 +29,16 @@ class Main extends Component {
       const reposPromise = ghClientInstance
         .fetchByUsername(this.state.username)
         .then((response) => {
+          // if the client has "false" as return value
+          // it means that something went wrong with the
+          // request,
+          if (!response) {
+            this.setState({
+              error: true,
+              errorMessage: "Application is experiencing instability.",
+            });
+            return;
+          }
           // spread all the information inside the repositories states
           // and save the user avatar in the state as well.
           this.setState({
@@ -53,23 +63,29 @@ class Main extends Component {
 
     return (
       <Container>
-        <header className="App-header">
-          <h3 style={{ margin: "10px 0", textAlign: "center" }}>
-            Search Github: {this.state.username}{" "}
-          </h3>
-          <Search usernameHandler={this.changeUsername} />
-        </header>
+        {this.state.error === true ? (
+          <h1>Application error</h1>
+        ) : (
+          <>
+            <header className="App-header">
+              <h3 style={{ margin: "10px 0", textAlign: "center" }}>
+                Search Github: {this.state.username}{" "}
+              </h3>
+              <Search usernameHandler={this.changeUsername} />
+            </header>
 
-        <div className="UserAvatar">
-          <img style={{ margin: "5px" }} src={this.state.avatar}></img>
-          <p style={{ margin: "5px" }}>
-            {this.state.username
-              ? `User ${this.state.username} has ${repositories.length} repos available.`
-              : null}
-          </p>
-        </div>
+            <div className="UserAvatar">
+              <img style={{ margin: "5px" }} src={this.state.avatar}></img>
+              <p style={{ margin: "5px" }}>
+                {this.state.username
+                  ? `User ${this.state.username} has ${repositories.length} repos available.`
+                  : null}
+              </p>
+            </div>
 
-        <StyledList repositories={this.state.repositories} />
+            <StyledList repositories={this.state.repositories} />
+          </>
+        )}
       </Container>
     );
   }

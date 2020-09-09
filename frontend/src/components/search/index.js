@@ -9,7 +9,6 @@ const Search = (props) => {
   // event handler for the search bar input
   const inputEvent = (event) => {
     const data = event.target.value;
-    console.log(data);
     setinputValue(data);
   };
 
