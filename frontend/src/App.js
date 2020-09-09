@@ -6,7 +6,6 @@ import Result from "./components/result";
 import Container from "./components/container";
 import StyledList from "./components/list";
 import ghClientInstance from "./external_clients/github";
-import logger from "./logger"
 
 
 class Main extends Component {
