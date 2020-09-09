@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { render, cleanup, fireEvent, getByText } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import List from "../../../components/list";
 afterEach(cleanup);
 
@@ -11,7 +11,7 @@ describe("test the List component", () => {
   };
 
   it("initializes with the searchbar enabled if repositories length is greater than 0", () => {
-    const { getByPlaceholderText, getByText } = render(
+    const { getByPlaceholderText } = render(
       <List
         repositories={[
           {
@@ -23,6 +23,35 @@ describe("test the List component", () => {
       />
     );
     // assert the search bar is on
-    expect(getByPlaceholderText("Search..."))
+    expect(getByPlaceholderText("Search..."));
+  });
+
+  it("all items of the array are being displayed properly", () => {
+    const { getByPlaceholderText, getByText } = render(
+      <List
+        repositories={[
+          {
+            name: "nice",
+            url: "test-url",
+            description: "nice-description",
+          },
+          {
+            name: "nice_two",
+            url: "test-url-two",
+            description: "nice-two-description",
+          },
+          {
+            name: "nice_three",
+            url: "test-url-three",
+            description: "nice-three-description",
+          },
+        ]}
+      />
+    );
+    // assert the search bar is on
+    expect(getByPlaceholderText("Search..."));
+    expect(getByText("Name: nice"));
+    expect(getByText("Name: nice_two"));
+    expect(getByText("Name: nice_three"));
   });
 });

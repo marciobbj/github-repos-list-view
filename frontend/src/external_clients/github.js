@@ -5,7 +5,7 @@ const github = axios.create({
 });
 
 class githubClient {
-  // Adapter class for the github client
+  // Adapter class for github graphql API.
 
   async fetchByUsername(username) {
     // Makes a POST request for the GraphQL endpoint
