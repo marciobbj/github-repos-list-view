@@ -40,13 +40,13 @@ class githubClient {
         }
       );
       if (!(response.status === 200)) {
-        console.error("Application is experiencing instability.")
-        return false
+        console.error("Application is experiencing instability.");
+        return false;
       }
       return response.data;
     } catch (err) {
-        console.error("Application is experiencing instability.")
-        return false;
+      console.error("Application is experiencing instability.");
+      return false;
     }
   }
 }
