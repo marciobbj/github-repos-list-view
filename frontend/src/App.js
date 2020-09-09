@@ -31,6 +31,9 @@ class Main extends Component {
       const reposPromise = ghClientInstance
         .fetchByUsername(this.state.username)
         .then((response) => {
+          // if the client has "false" as return value
+          // it means that something went wrong with the
+          // request, 
           if (!response) {
             this.setState({
               error: true,
