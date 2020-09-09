@@ -35,14 +35,18 @@ class githubClient {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${"8913ed395c8f547100928a131080d7c88b00e5d3"}`,
+            Authorization: `Bearer ${"8913ed395c8f47100928a131080d7c88b00e5d3"}`,
           },
         }
       );
+      if (!(response.status === 200)) {
+        console.error("Application is experiencing instability.")
+        return false
+      }
       return response.data;
     } catch (err) {
-      console.error(err);
-      return false;
+        console.error("Application is experiencing instability.")
+        return false;
     }
   }
 }

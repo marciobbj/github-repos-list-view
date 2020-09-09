@@ -6,6 +6,8 @@ import Result from "./components/result";
 import Container from "./components/container";
 import StyledList from "./components/list";
 import ghClientInstance from "./external_clients/github";
+import logger from "./logger"
+
 
 class Main extends Component {
   constructor(props) {
@@ -29,6 +31,13 @@ class Main extends Component {
       const reposPromise = ghClientInstance
         .fetchByUsername(this.state.username)
         .then((response) => {
+          if (!response) {
+            this.setState({
+              error: true,
+              errorMessage: "Application is experiencing instability."
+            })
+            return;
+          }
           // spread all the information inside the repositories states
           // and save the user avatar in the state as well.
           this.setState({
@@ -53,7 +62,7 @@ class Main extends Component {
 
     return (
       <Container>
-        <header className="App-header">
+        {this.state.error === true ? <h1>Application error</h1> : <><header className="App-header">
           <h3 style={{ margin: "10px 0", textAlign: "center" }}>
             Search Github: {this.state.username}{" "}
           </h3>
@@ -69,7 +78,8 @@ class Main extends Component {
           </p>
         </div>
 
-        <StyledList repositories={this.state.repositories} />
+        <StyledList repositories={this.state.repositories} /></>}
+        
       </Container>
     );
   }
