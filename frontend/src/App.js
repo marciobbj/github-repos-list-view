@@ -4,7 +4,7 @@ import GlobalStyle from "./styles/global";
 import Search from "./components/search";
 import Result from "./components/result";
 import Container from "./components/container";
-import StyledList from "./components/list";
+import List from "./components/list";
 import ghClientInstance from "./external_clients/github";
 
 class Main extends Component {
@@ -83,7 +83,7 @@ class Main extends Component {
               </p>
             </div>
 
-            <StyledList repositories={this.state.repositories} />
+            <List repositories={this.state.repositories} />
           </>
         )}
       </Container>
