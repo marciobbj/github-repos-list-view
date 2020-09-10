@@ -50,8 +50,8 @@ describe("test the List component", () => {
     );
     // assert the search bar is on
     expect(getByPlaceholderText("Search..."));
-    expect(getByText("Name: nice"));
-    expect(getByText("Name: nice_two"));
-    expect(getByText("Name: nice_three"));
+    expect(getByText("nice"));
+    expect(getByText("nice_two"));
+    expect(getByText("nice_three"));
   });
 });

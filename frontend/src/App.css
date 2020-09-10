@@ -16,3 +16,8 @@
   display: flex;
   margin: 0;
 }
+.searchInput {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
