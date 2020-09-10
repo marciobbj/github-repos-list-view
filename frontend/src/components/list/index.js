@@ -1,23 +1,22 @@
 import styled from "styled-components";
 import React, { Component, setState } from "react";
 import Result from "./../result";
-import MaterialList from '@material-ui/core/List';
-import ListItemLink from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
+import MaterialList from "@material-ui/core/List";
+import ListItemLink from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import { makeStyles } from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
 }));
-
 
 class List extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class List extends Component {
       filtered: [],
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handlerItemClick = this.handleItemClick.bind
+    this.handlerItemClick = this.handleItemClick.bind;
   }
 
   componentDidMount() {
@@ -44,7 +43,7 @@ class List extends Component {
   handleItemClick() {
     const [open, setOpen] = setState(true);
     setOpen(!open);
-  };
+  }
 
   handleChange(e) {
     // Variable to hold the original version of the list
@@ -84,30 +83,28 @@ class List extends Component {
       <div>
         {this.props.repositories.length > 0 ? (
           <div class="searchInput">
-          <input
-            type="text"
-            className="input"
-            onChange={this.handleChange}
-            placeholder="Search..."
-          />
+            <input
+              type="text"
+              className="input"
+              onChange={this.handleChange}
+              placeholder="Search..."
+            />
           </div>
         ) : null}
-        <MaterialList
-          component="nav"
-          aria-label="main repositories">
-        {this.state.filtered.map(
-          (repo) => (
+        <MaterialList component="nav" aria-label="main repositories">
+          {this.state.filtered.map((repo) => (
             <>
-            <ListItemLink key={repo.name}>
-              <ListItemIcon>
-                <GitHubIcon />
-              </ListItemIcon>
-                <a href={repo.url} default="_blank"><ListItemText primary={repo.name} /></a>
-            </ListItemLink>
-            <Divider />
+              <ListItemLink key={repo.name}>
+                <ListItemIcon>
+                  <GitHubIcon />
+                </ListItemIcon>
+                <a href={repo.url} default="_blank">
+                  <ListItemText primary={repo.name} />
+                </a>
+              </ListItemLink>
+              <Divider />
             </>
-          )
-        )}
+          ))}
         </MaterialList>
       </div>
     );
