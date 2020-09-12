@@ -1,6 +1,18 @@
 import React, { useState, setState } from "react";
 import ghClientInstance from "./../../external_clients/github";
 
+const useStateWithLocalStorage = (localStorageKey) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ""
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value]);
+
+  return [value, setValue];
+};
+
 const Search = (props) => {
   // stores the input values and handle its
   // updates behind the covers.

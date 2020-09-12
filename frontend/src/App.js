@@ -26,29 +26,43 @@ class Main extends Component {
     // if the new username value is different than
     // the previous one, then we make the Github call.
     if (prevState.username != this.state.username) {
-      const reposPromise = ghClientInstance
-        .fetchByUsername(this.state.username)
-        .then((response) => {
-          // if the client has "false" as return value
-          // it means that something went wrong with the
-          // request,
-          if (!response) {
+      // Checking whether the user is already in cache
+      const cachedRepos = localStorage.getItem(this.state.username);
+
+      if (cachedRepos) {
+        this.setState({
+          repositories: [...JSON.parse(cachedRepos)],
+          avatar: localStorage.getItem(`${this.state.username}_avatar`),
+        });
+        return;
+      } else {
+        const reposPromise = ghClientInstance
+          .fetchByUsername(this.state.username)
+          .then((response) => {
+            // if the client has "false" as return value
+            // it means that something went wrong with the
+            // request,
+            if (!response) {
+              this.setState({
+                error: true,
+                errorMessage: "Application is experiencing instability.",
+              });
+              return;
+            }
+            // caches the result
+            this.onSetResult(response, this.state.username);
+
             this.setState({
-              error: true,
-              errorMessage: "Application is experiencing instability.",
+              repositories: [
+                ...response.data.repositoryOwner.repositories.nodes,
+              ],
+              avatar: response.data.repositoryOwner.avatarUrl,
             });
             return;
-          }
-          // spread all the information inside the repositories states
-          // and save the user avatar in the state as well.
-          this.setState({
-            repositories: [...response.data.repositoryOwner.repositories.nodes],
-            avatar: response.data.repositoryOwner.avatarUrl,
-          });
-          return;
-        })
-        .catch((err) => console.error(err));
-      return;
+          })
+          .catch((err) => console.error(err));
+        return;
+      }
     }
   }
 
@@ -56,6 +70,22 @@ class Main extends Component {
     this.setState({
       username: username,
     });
+  }
+
+  onSetResult(response, username) {
+    const repo_label = `${username}`;
+    const avatar_label = `${username}_avatar`;
+
+    // set repos in cache
+    localStorage.setItem(
+      repo_label,
+      JSON.stringify(response.data.repositoryOwner.repositories.nodes)
+    );
+
+    // set avatar url in cache
+    localStorage.setItem(avatar_label, response.data.repositoryOwner.avatarUrl);
+
+    return;
   }
 
   render() {
