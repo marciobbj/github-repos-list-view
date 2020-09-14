@@ -6,8 +6,8 @@ const github = axios.create({
 
 class githubClient {
   // Adapter class for github graphql API.
-
   async fetchByUsername(username) {
+    console.log(process.env.REACT_APP_GITHUB_API_KEY)
     // Makes a POST request for the GraphQL endpoint
     // requesting user information.
     try {
@@ -35,7 +35,7 @@ class githubClient {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${"8913ed395c8f547100928a131080d7c88b00e5d3"}`,
+            Authorization: `Bearer ${process.env.REACT_APP_GITHUB_API_KEY}`,
           },
         }
       );

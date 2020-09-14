@@ -9,6 +9,7 @@
 
 ```bash
 $ cd frontend
+$ export REACT_APP_GITHUB_API_KEY=your_github_key
 $ npm install
 $ npm run start
 ```
